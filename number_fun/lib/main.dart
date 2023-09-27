@@ -37,7 +37,6 @@ class _MyAppState extends State<MyApp> {
   }
 
   List<Widget> _buildGridItems(int count) {
-    int numOfFactors = 0;
     List<Widget> items = [];
     for (int i = 1; i <= count; i++) {
       Color backgroundColor;
@@ -74,6 +73,13 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+    int numClm;
+    if (_numItems < 150){
+      numClm = 20;
+    }
+    else{
+      numClm = 40;
+    }
     return MaterialApp(
       theme: ThemeData.dark(),  // Applying dark theme
       home: Scaffold(
@@ -85,15 +91,15 @@ class _MyAppState extends State<MyApp> {
             Slider(
               value: _sliderValue,
               min: 1,
-              max: 500,
-              divisions: 499,
+              max: 700,
+              divisions: 699,
               onChanged: _updateSliderValue,
             ),
             Text('${_sliderValue.toInt()} has $_numOfFactors factors.', style: const TextStyle(color: Colors.amberAccent, fontSize: 18), ),
             const SizedBox(height: 10,),
             Expanded(
               child: GridView.count(
-                crossAxisCount: 20,
+                crossAxisCount: numClm,
                 children: _buildGridItems(_numItems),
               ),
             ),
